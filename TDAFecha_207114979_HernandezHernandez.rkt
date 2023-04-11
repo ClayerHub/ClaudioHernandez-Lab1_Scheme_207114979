@@ -1,47 +1,11 @@
 #lang racket
-#|
-;Compartir (share)
-(define share)
-;Copiar (copy)
-(define copy)
-;Mover (move)
-(define move)
-;Eliminar archivos (del)
-(define del)
-;Añadir archivos (addFile)
-(define addFile)
-;Crear carpetas y subcarpetas, también llamados directorios (md)
-(define md)
-;Eliminar carpetas (rd)
-(define rd) 
-;Cambiar de directorio (cd)
-(define cd)
-;Renombrar (ren)
-(define ren)
-;Buscar dentro del contenido de los archivos (grep)
-(define grep)
-;Listar archivos con parámetros tipo /s /a (dir)
-(define dir)
-;Formatear una unidad (format)
-(define format)
-;Encriptar (encrypt)
-(define encrypt)
-;Desencriptar (decrypt)
-(define decrypt)
-|#
-;if devuelve el primer valor si es verdadero, y el segundo si es falso
-(if #t "Verdadero" "Falso"); eso devuelve "Verdadero"
-(if #f "Verdadero" "Falso"); eso devuelve "Falso"
-;definicion que calcula el promedio entre dos numeros
-(define (promedio x y) (/ (+ x y) 2))
-
-;El TDA de la fecha utilizara como base el "ejemplo de implementacion TDA Fecha (RG) subido en uvirtual como apoyo
-;Este TDA representa un fecha, donde se incluye el dia, mes y año. Estos datos seran guardados en una lista que lleve el mismo orden
+;El TDA de la fecha utilizara como base el "ejemplo de implementacion TDA Fecha subido en uvirtual como apoyo
+;Este TDA representa una fecha, donde se incluye el dia, mes y año. Estos datos seran guardados en una lista que lleve el mismo orden
 ;(Mes) Int X (Dia) Int X (Año) Int
 
 
 ;Funcion que permite crear una fecha, la cual la entrega en una lista
-(define (date-list dia mes anio)
+(define (fecha-lista dia mes anio)
   (if
    (and (integer? dia) (integer? mes) (integer? anio)
    (> dia 0) (< 32) (> mes 0) (< mes 13) (not (= anio 0)))
@@ -50,7 +14,7 @@
 
 ;Funcion que determina si el elemento introducido es del tipo fecha
 (define (fecha? f)
-  (and (list? f) (= 3 (lenght f)) (not(null? (fecha (car f) (cadr f) (caddr f))))))
+  (and (list? f) (= 3 (length f)) (not(null? (fecha-lista (car f) (cadr f) (caddr f))))))
 
 ;Funcion que retorna el dia de una fecha
 (define (get-dia f)
@@ -97,4 +61,5 @@
         ((= nombre-del-mes 11) "Noviembre")
         ((= nombre-del-mes 12) "Diciembre"))) 
 
+;provide permite utilizar las funciones del TDA en otros archivos
 (provide (all-defined-out))
