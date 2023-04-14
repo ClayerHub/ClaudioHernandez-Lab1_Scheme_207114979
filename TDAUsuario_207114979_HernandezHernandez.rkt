@@ -34,5 +34,26 @@
   (if(list? lista-usuarios) (cdr lista-usuarios)null))
 
 ;Funcion que agrega un usuario a la lista de usuarios, pero primero realiza una revision recursiva para verificar que ese usuario ya exista
-(define (agregar-usuario lista-usuarios usuario ))
+(define (agregar-usuario lista-usuarios usuario booleano)
+  (if(or(or(not (usuario? usuario))(not(list? lista-usuarios)))(not(boolean? booleano))) null
+     (if(null? lista-usuarios)
+        (if (equal? booleano #t) null
+            (cons usuario null))
+        (if(not(equal? (get-nombre-usuario usuario)(get-nombre-usuario(car-lista-usuarios lista-usuarios))))
+           (cons (car-lista-usuarios lista-usuarios) (agregar-usuario(cdr-lista-usuarios lista-usuarios) usuario booleano))
+           (cons (car-lista-usuarios lista-usuarios) (agregar-usuario(cdr-lista-usuarios lista-usuarios) usuario #t))))))
 
+;Funcion que compara los nombres de dos usuarios para revisar si son el mismo
+(define (mismo-nombre? usuario-1 usuario-2)
+  (if(and(usuario? usuario-1)(usuario? usuario-2))
+     (if(equal?(get-nombre-usuario usuario-1)(get-nombre-usuario usuario-2))#t
+        #f)
+     null))
+
+;Funcion que vuelve a string el nombre de usuario y la fecha de registro de un usuario
+(define(usuario-string usuario)
+  (if(usuario? usuario)
+     (string-join(list "\n" "Nombre de usuario:" (get-nombre-usuario usuario) "\n" "Fecha de registro:" (get-fecha-usuario usuario) "\n"))""))
+
+;provide permite utilizar las funciones del TDA en otros archivos
+(provide (all-defined-out))
