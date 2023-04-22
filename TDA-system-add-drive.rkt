@@ -2,38 +2,66 @@
 
 ;funciones a realizar para tda system - add-drive
 
+;'(nombre-de-sistema dia-creacion mes-creacion anio-creacion lista-unidades lista-nombre-unidades lista-capacidad-unidades
 ;funcion
-(define (add-drive system letter name capacity listaUnidades)
-  (if (and (verificar-letter letter)(existe-unidad? letter listaUnidades))
-      (list letter name capacity)
-      (displayln "No se ha podido añadir una nueva unidad.")))
+(define (add-drive system letter name capacity)
+  (if(and (verificar-letter letter) (verificar-name name) (verificar-capacity capacity))
+     (if (existe-unidad? letter (quinto-elemento-lista system))#f
+         (if (existe-nombre-unidad? name (sexto-elemento-lista system))#f
+             (begin(agregar-a-lista (list letter system))
+             (agregar-a-lista (list name system))
+             (agregar-a-lista (list capacity system)))))
+     #f))
 
-;funcion que verifica si letter es un elemento char
+;funcion que verifica si el elemento es un char
 (define (verificar-letter letter)
   (if (char? letter) #t
       #f))
-;funcion que verifica si name es un elemento string
+;funcion que verifica si el elemento es un string
 (define (verificar-name name)
   (if (string? name) #t
       #f))
-;funcion que verifica si capacity es un elemento int
+;funcion que verifica si el elemento es un entero
 (define (verificar-capacity capacity)
   (if (integer? capacity) #t
       #f))
 
-;funcion que obtiene al primer nombre de unidad de la lista de unidades
-(define (car-unidad listaUnidades)
-  (if (list? listaUnidades) (car listaUnidades)null))
+;funcion que obtiene el primer elemento de una lista
+(define (car-unidad lista)
+  (if (list? lista) (car lista)null))
 
-;funcion que obtiene los nombres de unidad de la lista de unidades, excepto el primero
-(define (cdr-unidad listaUnidades)
-  (if (list? listaUnidades) (cdr listaUnidades)null))
+;funcion que obtiene los elementos de una lista, excepto el primero
+(define (cdr-unidad lista)
+  (if (list? lista) (cdr lista)null))
+
+;funcion que obtiene el quinto elemento de una lista
+(define (quinto-elemento-lista lista)
+  (if(list? lista)(list-ref lista 4)null))
+
+;funcion que obtiene el sexto elemento de una lista
+(define (sexto-elemento-lista lista)
+  (if(list? lista)(list-ref lista 5)null))
+
+;funcion que obtiene el septimo elemento de una lista
+(define (septimo-elemento-lista lista)
+  (if(list? lista)(list-ref lista 6)null))
 
 ;funcion que verifica si la unidad letter ya existe
-(define (existe-unidad? unidad listaUnidades)
-  (if (null? listaUnidades)#t
-      (if (not(char=? unidad (car-unidad listaUnidades)))
-          (existe-unidad? (unidad (cdr-unidad listaUnidades)))
-          #f)))
+(define (existe-unidad? letter system)
+  (if (null? system)#t
+      (if (char=? letter (car-unidad system))#f
+          (existe-unidad? letter (cdr-unidad system)))))
+
+;funcion que verifica si el nombre de la unidad ya existe
+(define (existe-nombre-unidad? name system)
+  (if (null? system)#t
+      (if (string=? name (car-unidad system))#f
+          (existe-nombre-unidad? name (cdr-unidad system)))))
+
+;funcion que agrega un elemento a una lista
+(define (agregar-a-lista x system)
+  (append system (list x)))
+
+
 
 
