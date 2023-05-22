@@ -2,66 +2,62 @@
 
 ;funciones a realizar para tda system - add-drive
 
-;'(nombre-de-sistema dia-creacion mes-creacion anio-creacion lista-unidades lista-nombre-unidades lista-capacidad-unidades
-;funcion
-(define (add-drive system letter name capacity)
-  (if(and (verificar-letter letter) (verificar-name name) (verificar-capacity capacity))
-     (if (existe-unidad? letter (quinto-elemento-lista system))#f
-         (if (existe-nombre-unidad? name (sexto-elemento-lista system))#f
-             (begin(agregar-a-lista (list letter system))
-             (agregar-a-lista (list name system))
-             (agregar-a-lista (list capacity system)))))
-     #f))
+;funcion que crea una unidad letter de nombre name y capacidad capacity
+;estos datos los agrega al system en una lista que contiene letter, name y capacity
+(define (add-drive system)
+  (lambda (letter)
+    (lambda(name)
+      (lambda(capacity)
+        (if(and(verificar_letter letter)(verificar_name name)(verificar_capacity capacity)(not(unidad_existente? system letter)))
+            (append system (list(list letter name capacity)))#f)))))
 
 ;funcion que verifica si el elemento es un char
-(define (verificar-letter letter)
+(define (verificar_letter letter)
   (if (char? letter) #t
       #f))
 ;funcion que verifica si el elemento es un string
-(define (verificar-name name)
+(define (verificar_name name)
   (if (string? name) #t
       #f))
 ;funcion que verifica si el elemento es un entero
-(define (verificar-capacity capacity)
+(define (verificar_capacity capacity)
   (if (integer? capacity) #t
       #f))
+
+(define (unidad_existente? system letter)
+  (if(null?(caddr system))#f
+     (or(char=? (primer_elemento_sublista(tercer_elemento_lista system)) letter)
+        (unidad_existente? (list (primer_elemento_lista system) (segundo_elemento_lista system) (resto_lista(tercer_elemento_lista system)))letter))))
 
 ;funcion que obtiene el primer elemento de una lista
 (define (car-unidad lista)
   (if (list? lista) (car lista)null))
 
 ;funcion que obtiene los elementos de una lista, excepto el primero
-(define (cdr-unidad lista)
+(define (resto_lista lista)
   (if (list? lista) (cdr lista)null))
 
-;funcion que obtiene el quinto elemento de una lista
-(define (quinto-elemento-lista lista)
-  (if(list? lista)(list-ref lista 4)null))
+;funcion que obtiene el primer elemento de una lista
+(define (primer_elemento_lista lista)
+  (if(list? lista)(caddr lista)null))
 
-;funcion que obtiene el sexto elemento de una lista
-(define (sexto-elemento-lista lista)
-  (if(list? lista)(list-ref lista 5)null))
+;funcion que obtiene el segundo elemento de una lista
+(define (segundo_elemento_lista lista)
+  (if(list? lista)(caddr lista)null))
+  
+;funcion que obtiene el tercer elemento de una lista
+(define (tercer_elemento_lista lista)
+  (if(list? lista)(caddr lista)null))
 
-;funcion que obtiene el septimo elemento de una lista
-(define (septimo-elemento-lista lista)
-  (if(list? lista)(list-ref lista 6)null))
-
-;funcion que verifica si la unidad letter ya existe
-(define (existe-unidad? letter system)
-  (if (null? system)#t
-      (if (char=? letter (car-unidad system))#f
-          (existe-unidad? letter (cdr-unidad system)))))
-
-;funcion que verifica si el nombre de la unidad ya existe
-(define (existe-nombre-unidad? name system)
-  (if (null? system)#t
-      (if (string=? name (car-unidad system))#f
-          (existe-nombre-unidad? name (cdr-unidad system)))))
+;funcion que obtiene el primer elemento de una sublista
+(define(primer_elemento_sublista lista)
+  (if(list? lista) (caar lista)null))
 
 ;funcion que agrega un elemento a una lista
 (define (agregar-a-lista x system)
   (append system (list x)))
 
-
+;Provide permite a que otros archivos puedan utilizar sus funciones
+(provide (all-defined-out))
 
 
