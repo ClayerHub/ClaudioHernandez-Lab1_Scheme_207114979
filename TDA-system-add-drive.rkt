@@ -1,63 +1,63 @@
 #lang racket
-
 ;funciones a realizar para tda system - add-drive
-
-;funcion que crea una unidad letter de nombre name y capacidad capacity
-;estos datos los agrega al system en una lista que contiene letter, name y capacity
-(define (add-drive system)
+;Dominio->system X letter (char) X name (String) X capacity (int)
+;Recorrido->system
+;función que permite añadir una unidad a un sistema. La letra de la unidad es única.
+(define (addDrive system)
   (lambda (letter)
     (lambda(name)
       (lambda(capacity)
         (if (< (length system )2)#f
-            (if (and(= (length system )2)(verificar_system system)(verificar_letter letter)(verificar_name name)(verificar_capacity capacity))
-                (list(primer_elemento_lista system)(segundo_elemento_lista system)(list(list letter name capacity)))
-                (if(and(verificar_system system)(verificar_letter letter)(verificar_name name)(verificar_capacity capacity)(not(unidad_existente? system letter)))
-                   (list(primer_elemento_lista system)(segundo_elemento_lista system)(append(tercer_elemento_lista system)(list (list letter name capacity))))#f)))))))
+            (if (and(= (length system )2)(verificar_system_drive system)(verificar_letter_drive letter)(verificar_name_drive name)(verificar_capacity_drive capacity))
+                (list(primer_elemento_lista_drive system)(segundo_elemento_lista_drive system)(list(list letter name capacity)))
+                (if(and(verificar_system_drive system)(verificar_letter_drive letter)(verificar_name_drive name)(verificar_capacity_drive capacity)(not(unidad_existente_drive? system letter)))
+                   (list(primer_elemento_lista_drive system)(segundo_elemento_lista_drive system)(append(tercer_elemento_lista_drive system)(list (list letter name capacity))))#f)))))))
               
 ;funcion que verifica si el elemento es una lista
-(define (verificar_system system)
+(define (verificar_system_drive system)
   (if (list? system) #t
       #f))
 
 ;funcion que verifica si el elemento es un char
-(define (verificar_letter letter)
+(define (verificar_letter_drive letter)
   (if (char? letter) #t
       #f))
 
 ;funcion que verifica si el elemento es un string
-(define (verificar_name name)
+(define (verificar_name_drive name)
   (if (string? name) #t
       #f))
 ;funcion que verifica si el elemento es un entero
-(define (verificar_capacity capacity)
+(define (verificar_capacity_drive capacity)
   (if (integer? capacity) #t
       #f))
 
 ;funcion que verifica si la unidad que se quiere ingresar ya existe en el system
-(define (unidad_existente? system letter)
-  (if(null?(tercer_elemento_lista system))#f
-     (or(char=? (primer_elemento_sublista(tercer_elemento_lista system)) letter)
-        (unidad_existente? (list (primer_elemento_lista system) (segundo_elemento_lista system) (resto_lista(tercer_elemento_lista system)))letter))))
+(define (unidad_existente_drive? system letter)
+  (if(null?(tercer_elemento_lista_drive system))#f
+     (or(char=? (primer_elemento_sublista_drive(tercer_elemento_lista_drive system)) letter)
+        (unidad_existente_drive? (list (primer_elemento_lista_drive system) (segundo_elemento_lista_drive system) (resto_lista_drive(tercer_elemento_lista_drive system)))letter))))
+
 
 ;funcion que obtiene los elementos de una lista, excepto el primero
-(define (resto_lista lista)
+(define (resto_lista_drive lista)
   (if (list? lista) (cdr lista)null))
 
 ;funcion que obtiene el primer elemento de una lista
-(define (primer_elemento_lista lista)
+(define (primer_elemento_lista_drive lista)
   (if(list? lista)(car lista)null))
 
 ;funcion que obtiene el segundo elemento de una lista
-(define (segundo_elemento_lista lista)
+(define (segundo_elemento_lista_drive lista)
   (if(list? lista)(cadr lista)null))
   
 ;funcion que obtiene el tercer elemento de una lista
-(define (tercer_elemento_lista lista)
+(define (tercer_elemento_lista_drive lista)
   (if(list? lista)(caddr lista)null))
 
 ;funcion que obtiene el primer elemento de una sublista
-(define(primer_elemento_sublista lista)
-  (if(list? lista) (caar lista)null))
+(define(primer_elemento_sublista_drive lista)
+  (if(list? lista)(caar lista)null))
 
 
 ;Provide permite a que otros archivos puedan utilizar sus funciones

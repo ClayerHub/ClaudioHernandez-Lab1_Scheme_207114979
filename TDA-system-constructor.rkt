@@ -1,15 +1,16 @@
 #lang racket
 (require racket/date)
 
-;funciones a realizar para tda system - constructor
 
-;funcion que define un sistema, verificando si name es un string, para asi
-;crear una lista con name y la fecha de creacion
-(define (crear_sistema name)
-  (if (string_name name) (list name (fecha_sistema name))#f))
+;funciones a realizar para tda system - constructor
+;Dominio->name (string)
+;Recorrido->system
+;función constructora de un sistema. Deja registro de la fecha de creación.
+(define (system name)
+  (if (string_name_cons name) (list name (fecha_sistema name))#f))
 
 ;funcion que verifica si el elemento es un string
-(define (string_name name)
+(define (string_name_cons name)
   (if (string? name) #t
       #f))
 
