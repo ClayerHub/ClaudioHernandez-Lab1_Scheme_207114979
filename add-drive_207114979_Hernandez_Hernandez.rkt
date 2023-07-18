@@ -3,7 +3,7 @@
 ;Dominio->system X letter (char) X name (String) X capacity (int)
 ;Recorrido->system
 ;función que permite añadir una unidad a un sistema. La letra de la unidad es única.
-(define (addDrive system letter name capacity)
+(define (add-drive system letter name capacity)
         (if (< (length system )2)#f
             (if (and(= (length system )2)(verificar_system_drive system)(verificar_letter_drive letter)(verificar_name_drive name)(verificar_capacity_drive capacity))
                 (list(primer_elemento_lista_drive system)(segundo_elemento_lista_drive system)(list(list letter name capacity)))
