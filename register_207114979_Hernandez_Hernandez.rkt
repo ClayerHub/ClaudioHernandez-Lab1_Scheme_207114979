@@ -4,13 +4,12 @@
 ;Dominio->system X userName (String)
 ;Recorrido->system
 ;funcion que registra un nuevo usuario al sistema. Nombre de usuario unico
-(define (register system)
-  (lambda (userName)
+(define (register system userName)
     (if (< (length system )3)#f
         (if (and(= (length system )3)(verificar_userName_register userName)(verificar_system_register system))
             (list(primer_elemento_lista_register system)(segundo_elemento_lista_register system)(tercer_elemento_lista_register system)(list userName))
             (if(and(verificar_userName_register userName)(verificar_system_register system)(not(usuario_existente_register? system userName)))
-               (list(primer_elemento_lista_register system)(segundo_elemento_lista_register system)(tercer_elemento_lista_register system)(append(cuarto_elemento_lista_register system)(list userName)))#f)))))
+               (list(primer_elemento_lista_register system)(segundo_elemento_lista_register system)(tercer_elemento_lista_register system)(append(cuarto_elemento_lista_register system)(list userName)))#f))))
    
 ;funcion que verifica si el elemento es una lista
 (define (verificar_system_register system)
