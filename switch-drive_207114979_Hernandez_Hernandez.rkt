@@ -5,10 +5,9 @@
 ;Recorrido->system
 
 ;funcion que fija la unidad en la que el usuario realizara acciones
-(define (switchDrive system)
-  (lambda (letter)
+(define (switch-drive system letter)
     (if(and(verificar_system_switch system)(verificar_letter_switch letter)(logeado? system)(unidad_existente_switch? system letter))
-       (append system (list letter))#f)))
+       (append system (list letter))#f))
 
 ;funcion que verifica si el elemento es una lista
 (define (verificar_system_switch system)
@@ -22,7 +21,7 @@
 
 ;funcion que verifica si el usuario esta con una sesion iniciada
 (define (logeado? system )
-  (if (null?(quinto_elemento_lista_switch system))#f
+  (if (< (length system)5)#f
       (or(string=?(primer_elemento_lista_switch(cuarto_elemento_lista_switch system))(quinto_elemento_lista_switch system))
                   (logeado? (list (primer_elemento_lista_switch system) (segundo_elemento_lista_switch system) (tercer_elemento_lista_switch system)(resto_lista_switch(cuarto_elemento_lista_switch system))))(quinto_elemento_lista_switch system))))
 
