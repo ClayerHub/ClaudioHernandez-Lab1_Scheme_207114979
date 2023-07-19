@@ -9,13 +9,25 @@
      (list(primer_elemento_lista_md system)(segundo_elemento_lista_md system)(tercer_elemento_lista_md system)(cuarto_elemento_lista_md system)
              (quinto_elemento_lista_md system)(sexto_elemento_lista_md system)
              (list(list name (sexto_elemento_lista_md system)(quinto_elemento_lista_md system) (fecha_md name) (fecha_md name) "Solo Lectura")))
-    (if(and(verificar_system_md system)(verificar_string_md name)(> (length system)6)(not(carpeta_existente_md? system name)))
+    (if(and(verificar_system_md system)(verificar_string_md name)(= (length system)7)(not(carpeta_existente_md? system name)))
        (list (primer_elemento_lista_md system)(segundo_elemento_lista_md system)(tercer_elemento_lista_md system)(cuarto_elemento_lista_md system)
              (quinto_elemento_lista_md system)(sexto_elemento_lista_md system)
-             (append (septimo_elemento_lista_md system)(list(list name (quinto_elemento_lista_md system) (fecha_md name) (fecha_md name) "Solo Lectura")))
-             (rrresto_lista_md (rrresto_lista_md (resto_lista_md system))))#f)))
+             (append (septimo_elemento_lista_md system)(list(list name (sexto_elemento_lista_md system)(quinto_elemento_lista_md system) (fecha_md name) (fecha_md name) "Solo Lectura"))))
+       (if(and(verificar_system_md system)(verificar_string_md name)(> (length system)7)(not(carpeta_existente_md? system name)))
+          (agregar_valor_sublista_md system (list(list name (sexto_elemento_lista_md system)(quinto_elemento_lista_md system) (fecha_md name) (fecha_md name) "Solo Lectura")))#f))))
+          
                                     
-  
+;funcion que agrega un valor en una posicion especifica de una sublista
+(define (agregar_valor_sublista_md lista_ext lista_int)
+  (cons (primer_elemento_lista_md lista_ext)
+        (cons (segundo_elemento_lista_md lista_ext)
+              (cons (tercer_elemento_lista_md lista_ext)
+                    (cons (cuarto_elemento_lista_md lista_ext)
+                          (cons (quinto_elemento_lista_md lista_ext)
+                                (cons (sexto_elemento_lista_md lista_ext)
+                                      (cons(append(septimo_elemento_lista_md lista_ext) lista_int)
+                                           (rrresto_lista_md (rrresto_lista_md (resto_lista_md lista_ext)))))))))))
+
 ;funcion que verifica si la carpeta que se quiere ingresar ya existe en el mismo directorio
 (define (carpeta_existente_md? system str)
   (if(null?(septimo_elemento_lista_md system))#f
@@ -23,7 +35,7 @@
         (carpeta_existente_md? (list (primer_elemento_lista_md system)(segundo_elemento_lista_md system)(tercer_elemento_lista_md system)
                                      (cuarto_elemento_lista_md system)(quinto_elemento_lista_md system)(sexto_elemento_lista_md system)
                                      (resto_lista_md(septimo_elemento_lista_md system)))str))))
-
+                                     
 ;funcion que verifica si el elemento es una lista
 (define (verificar_system_md system)
   (if (list? system) #t
