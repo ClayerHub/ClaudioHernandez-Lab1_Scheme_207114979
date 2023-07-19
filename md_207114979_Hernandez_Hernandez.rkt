@@ -5,14 +5,15 @@
 ;Recorrido->system
 ;función que permite crear directorio dentro de una unidad a partir del nombre especificado
 (define (md system name)
-  (if(and(verificar_system_switch system)(verificar_string_md name)(< (length system)7))
+  (if(and(verificar_system_md system)(verificar_string_md name)(< (length system)7))
      (list(primer_elemento_lista_md system)(segundo_elemento_lista_md system)(tercer_elemento_lista_md system)(cuarto_elemento_lista_md system)
              (quinto_elemento_lista_md system)(sexto_elemento_lista_md system)
-             (list(list name (quinto_elemento_lista_md system) (fecha_md name) (fecha_md name) "Solo Lectura")))
-    (if(and(verificar_system_switch system)(verificar_string_md name)(> (length system)6)(not(carpeta_existente_md? system name)))
+             (list(list name (sexto_elemento_lista_md system)(quinto_elemento_lista_md system) (fecha_md name) (fecha_md name) "Solo Lectura")))
+    (if(and(verificar_system_md system)(verificar_string_md name)(> (length system)6)(not(carpeta_existente_md? system name)))
        (list (primer_elemento_lista_md system)(segundo_elemento_lista_md system)(tercer_elemento_lista_md system)(cuarto_elemento_lista_md system)
              (quinto_elemento_lista_md system)(sexto_elemento_lista_md system)
-             (append (septimo_elemento_lista_md system)(list(list name (quinto_elemento_lista_md system) (fecha_md name) (fecha_md name) "Solo Lectura"))))#f)))
+             (append (septimo_elemento_lista_md system)(list(list name (quinto_elemento_lista_md system) (fecha_md name) (fecha_md name) "Solo Lectura")))
+             (rrresto_lista_md (rrresto_lista_md (resto_lista_md system))))#f)))
                                     
   
 ;funcion que verifica si la carpeta que se quiere ingresar ya existe en el mismo directorio
@@ -24,7 +25,7 @@
                                      (resto_lista_md(septimo_elemento_lista_md system)))str))))
 
 ;funcion que verifica si el elemento es una lista
-(define (verificar_system_switch system)
+(define (verificar_system_md system)
   (if (list? system) #t
       #f))
 
@@ -36,6 +37,10 @@
 ;funcion que obtiene los elementos de una lista, excepto el primero
 (define (resto_lista_md lista)
   (if (list? lista) (cdr lista)null))
+
+;funcion que obtiene los elementos de una lista, excepto los primeros tres
+(define (rrresto_lista_md lista)
+  (if (list? lista) (cdddr lista)null))
 
 ;funcion que almacena tres elementos (day, month, year) en una lista
 (define (fecha_md name)

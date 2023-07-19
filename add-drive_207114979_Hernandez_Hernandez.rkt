@@ -4,12 +4,28 @@
 ;Recorrido->system
 ;función que permite añadir una unidad a un sistema. La letra de la unidad es única.
 (define (add-drive system letter name capacity)
-        (if (< (length system )2)#f
-            (if (and(= (length system )2)(verificar_system_drive system)(verificar_letter_drive letter)(verificar_name_drive name)(verificar_capacity_drive capacity))
-                (list(primer_elemento_lista_drive system)(segundo_elemento_lista_drive system)(list(list letter name capacity)))
-                (if(and(verificar_system_drive system)(verificar_letter_drive letter)(verificar_name_drive name)(verificar_capacity_drive capacity)(not(unidad_existente_drive? system letter)))
-                   (list(primer_elemento_lista_drive system)(segundo_elemento_lista_drive system)(append(tercer_elemento_lista_drive system)(list (list letter name capacity))))#f))))
-              
+        (if (null? system)#f
+            (if(and (verificar_system_drive system)(verificar_letter_drive letter)(verificar_name_drive name)
+                    (verificar_capacity_drive capacity)(<(length system)3))
+               (agregar_valor_add-drive system (list(list letter name capacity)) 3)
+               (if(and (verificar_system_drive system)(verificar_letter_drive letter)(verificar_name_drive name)
+                    (verificar_capacity_drive capacity)(>(length system)2)(not(unidad_existente_drive? system letter)))
+                  (agregar_valor_sublista_add-drive system (list letter name capacity))#f))))
+
+
+;funcion que agrega un valor en una posicion especifica
+(define (agregar_valor_add-drive lista name posicion)
+  (if (null? lista)(list name)
+      (if (= posicion 0) (cons name lista)
+      (cons (primer_elemento_lista_drive lista)(agregar_valor_add-drive(resto_lista_drive lista)name(- posicion 1))))))
+
+;funcion que agrega un valor en una posicion especifica de una sublista
+(define (agregar_valor_sublista_add-drive lista_ext lista_int)
+  (cons (primer_elemento_lista_drive lista_ext)
+        (cons (segundo_elemento_lista_drive lista_ext)
+              (cons(append(tercer_elemento_lista_drive lista_ext) (list lista_int))
+                   (rrresto_lista_drive lista_ext)))))
+
 ;funcion que verifica si el elemento es una lista
 (define (verificar_system_drive system)
   (if (list? system) #t
@@ -39,6 +55,10 @@
 ;funcion que obtiene los elementos de una lista, excepto el primero
 (define (resto_lista_drive lista)
   (if (list? lista) (cdr lista)null))
+
+;funcion que obtiene los elementos de una lista, excepto los primeros tres elementos
+(define (rrresto_lista_drive lista)
+  (if (list? lista) (cdddr lista)null))
 
 ;funcion que obtiene el primer elemento de una lista
 (define (primer_elemento_lista_drive lista)

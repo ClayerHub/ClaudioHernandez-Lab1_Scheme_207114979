@@ -8,16 +8,17 @@
 (define (login system userName)
     (if(null? system)#f
        (if(and (verificar_system_login system)(verificar_userName_login userName)(usuario_existente_login? system userName)(<(length system)5))
-          (agregar_valor_login system userName)
+          (agregar_valor_login system userName 4)
           (if(and(verificar_system_login system)(verificar_userName_login userName)(usuario_existente_login? system userName)
                  (>(length system)4)(login_existente? system userName))
              system
           #f))))
     
-;funcion que agrega un valor en una posicion especifica (en este caso, la quinta posicion)
-(define (agregar_valor_login lista name)
-  (if (null? lista)(list name)      
-      (cons (primer_elemento_lista_login lista)(agregar_valor_login(resto_lista_login lista)(- 4 1)))))
+;funcion que agrega un valor en una posicion especifica
+(define (agregar_valor_login lista name posicion)
+  (if (null? lista)(list name)
+      (if (= posicion 0) (cons name lista)
+      (cons (primer_elemento_lista_login lista)(agregar_valor_login(resto_lista_login lista)name(- posicion 1))))))
   
 ;funcion que verifica si el elemento es una lista
 (define (verificar_system_login system)
@@ -33,7 +34,9 @@
 (define (usuario_existente_login? system userName)
   (if(null?(cuarto_elemento_lista_login system))#f
      (or(string=? (primer_elemento_lista_login(cuarto_elemento_lista_login system)) userName)
-        (usuario_existente_login? (list (primer_elemento_lista_login system) (segundo_elemento_lista_login system) (tercer_elemento_lista_login system) (resto_lista_login(cuarto_elemento_lista_login system)))userName))))
+        (usuario_existente_login? (list (primer_elemento_lista_login system)
+                                        (segundo_elemento_lista_login system) (tercer_elemento_lista_login system)
+                                        (resto_lista_login(cuarto_elemento_lista_login system)))userName))))
 
 ;funcion que verifica si ya se esta logeado (en caso de ser el mismo usuario, cuenta como valido pero no se vuelve a escribir)
 (define (login_existente? system userName)

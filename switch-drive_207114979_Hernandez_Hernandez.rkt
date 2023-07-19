@@ -6,8 +6,18 @@
 
 ;funcion que fija la unidad en la que el usuario realizara acciones
 (define (switch-drive system letter)
-    (if(and(verificar_system_switch system)(verificar_letter_switch letter)(logeado? system)(unidad_existente_switch? system letter))
-       (append system (list letter))#f))
+  (if(and(verificar_system_switch system)(verificar_letter_switch letter)(logeado? system)(unidad_existente_switch? system letter)(<=(length system)6))
+     (list (primer_elemento_lista_switch system)(segundo_elemento_lista_switch system)(tercer_elemento_lista_switch system)
+           (cuarto_elemento_lista_switch system)(quinto_elemento_lista_switch system)(string letter))
+    (if(and(verificar_system_switch system)(verificar_letter_switch letter)(logeado? system)(unidad_existente_switch? system letter)(>(length system)6))
+       (cons (primer_elemento_lista_switch system)
+             (cons (segundo_elemento_lista_switch system)
+                   (cons (tercer_elemento_lista_switch system)
+                         (cons (cuarto_elemento_lista_switch system)
+                               (cons (quinto_elemento_lista_switch system)
+                                     (cons (string letter) (rrresto_lista_switch (rrresto_lista_switch system))))))))#f)))
+
+
 
 ;funcion que verifica si el elemento es una lista
 (define (verificar_system_switch system)
@@ -30,6 +40,10 @@
   (if(null?(tercer_elemento_lista_switch system))#f
      (or(char=? (primer_elemento_lista_switch(primer_elemento_lista_switch(tercer_elemento_lista_switch system))) letter)
         (unidad_existente_switch? (list (primer_elemento_lista_switch system) (segundo_elemento_lista_switch system) (resto_lista_switch(tercer_elemento_lista_switch system)))letter))))
+
+;funcion que obtiene los elementos de una lista, excepto los primeros tres
+(define (rrresto_lista_switch lista)
+  (if (list? lista) (cdddr lista)null))
 
 ;funcion que obtiene los elementos de una lista, excepto el primero
 (define (resto_lista_switch lista)
