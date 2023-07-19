@@ -6,20 +6,19 @@
 
 ;funcion que que permite iniciar sesión con un usuario del sistema, solo si ya existe
 (define (login system userName)
-    (if (< (length system)4)#f
-        (if (and(verificar_userName_login userName)
-                (verificar_system_login system)
-                (usuario_existente_login? system userName)
-                (< (length system)5))
-            (append system (list userName))
-            (if (and(verificar_userName_login userName)
-                    (verificar_system_login system)
-                    (usuario_existente_login? system userName)
-                    (< (length system)6)
-                    (login_existente? system userName))
-                system #f))))
+    (if(null? system)#f
+       (if(and (verificar_system_login system)(verificar_userName_login userName)(usuario_existente_login? system userName)(<(length system)5))
+          (agregar_valor_login system userName)
+          (if(and(verificar_system_login system)(verificar_userName_login userName)(usuario_existente_login? system userName)
+                 (>(length system)4)(login_existente? system userName))
+             system
+          #f))))
     
-   
+;funcion que agrega un valor en una posicion especifica (en este caso, la quinta posicion)
+(define (agregar_valor_login lista name)
+  (if (null? lista)(list name)      
+      (cons (primer_elemento_lista_login lista)(agregar_valor_login(resto_lista_login lista)(- 4 1)))))
+  
 ;funcion que verifica si el elemento es una lista
 (define (verificar_system_login system)
   (if (list? system) #t

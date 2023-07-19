@@ -5,8 +5,8 @@
 ;Recorrido->system
 ;funcion que que permite cerrar la sesión de un usuario en el sistema
 (define(logout system)
-  (if(and (verificar_system_logout system)(>= (length system)5))
-     (list (primer_elemento_lista_logout system) (segundo_elemento_lista_logout system) (tercer_elemento_lista_logout system) (cuarto_elemento_lista_logout system))#f))
+  (if(and (verificar_system_logout system)(> (length system)4))
+     (remove (quinto_elemento_lista_logout system)system)#f))
 
 ;funcion que verifica si el elemento es una lista
 (define (verificar_system_logout system)
@@ -32,6 +32,10 @@
 ;funcion que obtiene el cuarto elemento de una lista
 (define (cuarto_elemento_lista_logout lista)
   (if(list? lista)(cadddr lista)null))
+
+;funcion que obtiene el quinto elemento de una lista
+(define (quinto_elemento_lista_logout lista)
+  (if(list? lista)(list-ref lista 4)null))
 
 ;funcion que obtiene el primer elemento de una sublista
 (define(primer_elemento_sublista_logout lista)
