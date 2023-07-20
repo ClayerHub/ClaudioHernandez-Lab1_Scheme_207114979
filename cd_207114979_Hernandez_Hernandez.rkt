@@ -66,7 +66,7 @@
 ;funcion que revisa si el valor de la lista
 (define (comparar_sublista_cd lista folderName)
   (if(null? (septimo_elemento_lista_cd lista))#f
-     (or(string=? (primer_elemento_sublista_cd (septimo_elemento_lista_cd lista))folderName)#t
+     (if(string=? (primer_elemento_sublista_cd (septimo_elemento_lista_cd lista))folderName)#t
          (comparar_sublista_cd (list (primer_elemento_lista_cd lista)(segundo_elemento_lista_cd lista)(tercer_elemento_lista_cd lista)
                                     (cuarto_elemento_lista_cd lista)(quinto_elemento_lista_cd lista)(sexto_elemento_lista_cd lista)
                                      (resto_lista_cd (septimo_elemento_lista_cd lista))) folderName))))
