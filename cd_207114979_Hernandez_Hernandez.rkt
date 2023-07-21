@@ -63,7 +63,7 @@
 (define (slash_inverso_cd folderName)
   (string=? folderName "/"))
 
-;funcion que revisa si el valor de la lista
+;funcion que revisa si el primer valor de las sublistas de la septima posicion son iguales a folferName
 (define (comparar_sublista_cd lista folderName)
   (if(null? (septimo_elemento_lista_cd lista))#f
      (if(string=? (primer_elemento_sublista_cd (septimo_elemento_lista_cd lista))folderName)#t

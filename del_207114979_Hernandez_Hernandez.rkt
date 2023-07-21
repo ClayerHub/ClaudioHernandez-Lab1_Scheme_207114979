@@ -2,14 +2,21 @@
 ;funciones a realizar para tda system - del
 ;Dominio->system x fileName(string)
 ;Recorrido->system
-; función para eliminar un archivo o varios archivos en base a un patrón determinado
+
+; función para eliminar un archivo en base a un nombre especifico
 (define (del system fileName)
   (if(null? list)#f
      (if (<(length system)8)#f
-         (if(and(verificar_system_del system)(verificar_string_del fileName)(=(length system)8))))))
-            
-         
-  
+         (if(and(verificar_system_del system)(verificar_string_del fileName)(=(length system)8))
+            (mismo_nombre_y_direccion? system fileName system)
+            (if (and(verificar_system_del system)(verificar_string_del fileName)(>(length system)8))
+                (append(mismo_nombre_y_direccion? system fileName system) (rrresto_lista_del (rrresto_lista_del (rrresto_lista_del system))))
+                #f)))))
+                     
+;funcion que obtiene los elementos de una lista, excepto los primeros tres
+(define (rrresto_lista_del lista)
+  (if (list? lista) (cdddr lista)null))
+
 ;funcion que verifica si el elemento es una lista
 (define (verificar_system_del system)
   (if (list? system) #t
@@ -21,14 +28,14 @@
       #f))
 
 ;funcion que comprueba si el fileName tiene el mismo valor que uno especifico de una sublista dentro de la lista
-(define (mismo_nombre_y_direccion? lista fileName)
+(define (mismo_nombre_y_direccion? lista fileName system)
   (if (null? (octavo_elemento_lista_del lista))#f
       (if(and(string=? (primer_elemento_sublista_del (octavo_elemento_lista_del lista))fileName)
              (equal? (cuarto_elemento_lista_del (primer_elemento_lista_del (octavo_elemento_lista_del lista)))(sexto_elemento_lista_del lista)))
-         #t
+         (append (remove (primer_elemento_lista_del (octavo_elemento_lista_del system))system) (list(primer_elemento_lista_del (octavo_elemento_lista_del system))))
          (mismo_nombre_y_direccion?(list (primer_elemento_lista_del lista)(segundo_elemento_lista_del lista)(tercer_elemento_lista_del lista)
                                          (cuarto_elemento_lista_del lista)(quinto_elemento_lista_del lista)(sexto_elemento_lista_del lista)
-                                         (septimo_elemento_lista_del lista)(resto_lista_del (octavo_elemento_lista_del lista)))fileName))))
+                                         (septimo_elemento_lista_del lista)(resto_lista_del (octavo_elemento_lista_del lista)))fileName system))))
                                                                                                                                                       
          
 ;funcion que entrega el primer valor de una sublista

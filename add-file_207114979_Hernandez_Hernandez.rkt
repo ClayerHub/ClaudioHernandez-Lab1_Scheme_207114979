@@ -105,7 +105,7 @@
 (define (septimo_elemento_lista_add-file lista)
   (if(list? lista)(list-ref lista 6)null))
 
-;funcion que obtiene el septimo elemento de una lista
+;funcion que obtiene el octavo elemento de una lista
 (define (octavo_elemento_lista_add-file lista)
   (if(list? lista)(list-ref lista 7)null))
 

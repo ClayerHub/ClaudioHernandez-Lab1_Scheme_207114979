@@ -12,6 +12,10 @@
                     (verificar_capacity_drive capacity)(>(length system)2)(not(unidad_existente_drive? system letter)))
                   (agregar_valor_sublista_add-drive system (list letter name capacity))#f))))
 
+;funcion run para ejecutar el comando add-drive en el sistema
+;(define (run system command)
+;  (lambda(letter name capacity)
+;    (command system letter name capacity)))
 
 ;funcion que agrega un valor en una posicion especifica
 (define (agregar_valor_add-drive lista name posicion)

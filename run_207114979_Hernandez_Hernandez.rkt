@@ -22,17 +22,7 @@
 (require "plus-one_207114979_Hernandez_Hernandez.rkt")
 (require "add-file_207114979_Hernandez_Hernandez.rkt")
 (require "del_207114979_Hernandez_Hernandez.rkt")
-;funciones a realizar para tda system - run
-;Dominio->system x command(funcion)
-;Recorrido->system
-;función que permite ejecutar un comando (función) sobre un sistema.
-(define (run system command)
-  (command system))
 
-;funcion que verifica si el elemento f es una funcion
-(define (verificar-funcion command)
-  (if (procedure? command) #t
-      #f))
 
 ;Provide permite a que otros archivos puedan utilizar sus funciones
 (provide (all-defined-out))
