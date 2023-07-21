@@ -1,42 +1,11 @@
 #lang racket
-(require racket/date)
-(require "constructor_207114979_Hernandez_Hernandez.rkt")
-(require "add-drive_207114979_Hernandez_Hernandez.rkt")
-(require "login_207114979_Hernandez_Hernandez.rkt")
-(require "logout_207114979_Hernandez_Hernandez.rkt")
-(require "register_207114979_Hernandez_Hernandez.rkt")
-(require "switch-drive_207114979_Hernandez_Hernandez.rkt")
-(require "encrypt_207114979_Hernandez_Hernandez.rkt")
-(require "ren_207114979_Hernandez_Hernandez.rkt")
-(require "decrypt_207114979_Hernandez_Hernandez.rkt")
-(require "dir_207114979_Hernandez_Hernandez.rkt")
-(require "format_207114979_Hernandez_Hernandez.rkt")
-(require "grep_207114979_Hernandez_Hernandez.rkt")
-(require "restore_207114979_Hernandez_Hernandez.rkt")
-(require "copy_207114979_Hernandez_Hernandez.rkt")
-(require "move_207114979_Hernandez_Hernandez.rkt")
-(require "cd_207114979_Hernandez_Hernandez.rkt")
-(require "view-trash_207114979_Hernandez_Hernandez.rkt")
-(require "rd_207114979_Hernandez_Hernandez.rkt")
-(require "minus-one_207114979_Hernandez_Hernandez.rkt")
-(require "plus-one_207114979_Hernandez_Hernandez.rkt")
-(require "add-file_207114979_Hernandez_Hernandez.rkt")
-(require "del_207114979_Hernandez_Hernandez.rkt")
-(require "run_207114979_Hernandez_Hernandez.rkt")
-(require "md_207114979_Hernandez_Hernandez.rkt")
-
-
-;FUNCIONES ESCRITAS EN EL INFORME DEL LABORATORIO Y PROBADAS
-;creando un sistema
+#|;creando un sistema
 (define S0 (system "newSystem"))
 
 ;añadiendo unidades. Incluye caso S2 que intenta añadir unidad con una letra que ya existe
-;CAMBIOS HECHOS AL LLAMARLA
-;FUNCION ANOTADA COMO addDrive EN EL CODIGO (En el codigo oficial la llaman add-drive
-;MAS PARENTESIS USADOS
-(define S1 ((run S0 addDrive) #\C "SO" 1000))
-(define S2 ((run S1 addDrive) #\C "SO1" 3000))
-(define S3 ((run S2 addDrive) #\D "Util" 2000))
+(define S1 ((run S0 add-drive) #\C "SO" 1000))
+(define S2 ((run S1 add-drive) #\C "SO1" 3000))
+(define S3 ((run S2 add-drive) #\D "Util" 2000))
 
 ;añadiendo usuarios. Incluye caso S6 que intenta registrar usuario duplicado
 (define S4 ((run S3 register) "user1"))
@@ -52,11 +21,8 @@
 (define S10 ((run S9 login) "user2"))
 
 ;cambios de unidad, incluyendo unidad inexistente K
-;CAMBIOS HECHOS AL LLAMARLA
-;FUNCION ANOTADA COMO switchDrive EN EL CODIGO (En el codigo oficial la llaman switch-drive)
-;MAS PARENTESIS USADOS
-(define S11 ((run S10 switchDrive) #\K))
-(define S12 ((run S11 switchDrive) #\C))
+(define S11 ((run S10 switch-drive) #\K))
+(define S12 ((run S11 switch-drive) #\C))
 
 ;añadiendo carpetas. Incluye casos de carpetas duplicadas.
 (define S13 ((run S12 md) "folder1"))
@@ -90,9 +56,7 @@
 (define S26 ((run S24 cd) "/"))
 
 ;se cambia de unidad
-;CAMBIOS HECHOS AL LLAMARLA
-;FUNCION ANOTADA COMO switchDrive EN EL CODIGO (En el codigo oficial la llaman switch-drive)
-(define S27 ((run S26 switchDrive) #\D))
+(define S27 ((run S26 switch-drive) #\D))
 
 ;crea carpeta e ingresa a carpeta
 (define S28 ((run S27 md) "folder5"))
@@ -105,66 +69,63 @@
 (define S31 ((run S30 format) #\D "newD"))
 
 ;añadiendo archivos
-(define S32 ((run S31 add-file) (file "foo1.txt" "txt" "hello world 1")))
-(define S33 ((run S32 add-file) (file "foo2.txt" "txt" "hello world 2")))
-(define S34 ((run S33 add-file) (file "foo3.docx" "docx" "hello world 3")))
-(define S35 ((run S34 add-file) (file "goo4.docx" "docx" "hello world 4" #\h\#h #\r\#r))) ;con atributos de seguridad oculto (h) y de solo lectura (r)
+(define S32 ((run S31 add-file) '("foo1.txt" "txt" "hello world 1")))
+(define S33 ((run S32 add-file) '("foo2.txt" "txt" "hello world 2")))
+(define S34 ((run S33 add-file) '("foo3.docx" "docx" "hello world 3")))
 
 ;eliminando archivos
-(define S36 ((run S35 del) "*.txt"))
-(define S37 ((run S35 del) "f*.docx"))
-(define S38 ((run S35 del) "goo4.docx"))
-(define S39 ((run S35 cd) ".."))
-(define S40 ((run S395 del) "folder1"))
+(define S35 ((run S34 del) "*.txt"))
+(define S36 ((run S35 del) "f*.docx"))
+(define S37 ((run S36 del) "goo4.docx"))
+(define S38 ((run S37 cd) ".."))
+(define S39 ((run S38 del) "folder1"))
 
 ;borrando una carpeta
-(define S41 ((run S39 rd) "folder1"))  ;no debería borrarla, pues tiene archivos
-(define S42 ((run S41 cd) "folder1"))
-(define S43 ((run S42 del) "*.*"))
-(define S44 ((run S43 cd) ".."))
-(define S45 ((run S44 rd) "folder1"))
+(define S40 ((run S39 rd) "folder1"))  ;no debería borrarla, pues tiene archivos
+(define S41 ((run S40 cd) "folder1"))
+(define S42 ((run S41 del) "*.*"))
+(define S43 ((run S42 cd) ".."))
+(define S44 ((run S43 rd) "folder1"))
 
 ;copiando carpetas y archivos
-(define S46 ((run S35 copy) "foo1.txt" "Cc:/folder3/"))
-(define S47 ((run S46 cd) ".."))
-(define S48 ((run S47 copy) "folder1" "d:/"))
+(define S45 ((run S44 copy) "foo1.txt" "Cc:/folder3/"))
+(define S46 ((run S45 cd) ".."))
+(define S47 ((run S46 copy) "folder1" "d:/"))
 
 ;moviendo carpetas y archivos
-(define S49 ((run S48 move) "folder3" "d:/"))
-(define S50 ((run S49 cd) "folder1"))
-(define S51 ((run S50 move) "foo3.docx" "d:/folder3/"))
+(define S48 ((run S47 move) "folder3" "d:/"))
+(define S49 ((run S48 cd) "folder1"))
+(define S50 ((run S49 move) "foo3.docx" "d:/folder3/"))
 
 ;renombrando carpetas y archivos
-(define S52 ((run S51 ren) "foo1.txt" "newFoo1.txt"))
-(define S53 ((run S52 ren) "foo2.txt" "newFoo1.txt")) ;no debería efectuar cambios pues ya existe archivo con este nombre
-(define S54 ((run S53 cd) ".."))
-(define S55 ((run S54 ren) "folder1" "newFolder1"))
+(define S51 ((run S50 ren) "foo1.txt" "newFoo1.txt"))
+(define S52 ((run S51 ren) "foo2.txt" "newFoo1.txt")) ;no debería efectuar cambios pues ya existe archivo con este nombre
+(define S53 ((run S52 cd) ".."))
+(define S54 ((run S53 ren) "folder1" "newFolder1"))
 
 ;listando la información
-(display (run S16 dir))
-(display (run S55 dir))
-(display ((run S55 dir) "/s")) ;muestra carpetas y subcarpetas de la unidad C
-(display ((run S55 dir) "/s /a")) ;muestra todo el contenido de carpetas y subcarpetas de la unidad C incluyendo archivo oculto goo4.docx
+(display ((run S53 dir) "/s")) ;muestra carpetas y subcarpetas de la unidad C
+(display ((run S53 dir) "/s /a")) ;muestra todo el contenido de carpetas y subcarpetas de la unidad C incluyendo archivo oculto goo4.docx
 
 ;encriptando archivos y carpetas
-(define S56 ((run S55 encrypt) plus-one minus-one "1234" "newFolder1"))
-(define S57 ((run S56 switch-drive) #\#D))
-(define S58 ((run S57 cd) "folder3"))
-(define S59 ((run S58 encrypt) plus-one minus-one "4321" "foo3.docx"))
+(define S55 ((run S53 encrypt) plus-one minus-one "1234" "newFolder1"))
+(define S56 ((run S55 switch-drive) #\\#D))
+(define S57 ((run S56 cd) "folder3"))
+(define S58 ((run S57 encrypt) plus-one minus-one "4321" "foo3.docx"))
 
 ;desencriptando archivos y carpetas
-(define S60 ((run S59 decrypt) "1234" "foo3.docx")) ;no logra desencriptar por clave incorrecta
-(define S61 ((run S60 decrypt) "4321" "foo3.docx"))
-(define S62 ((run S61 switch-drive) #\#C))
-(define S63 ((run S62 decrypt) "1234" "newFolder1"))
+(define S59 ((run S58 decrypt) "1234" "foo3.docx")) ;no logra desencriptar por clave incorrecta
+(define S60 ((run S59 decrypt) "4321" "foo3.docx"))
+(define S61 ((run S60 switch-drive) #\\#C))
+(define S62 ((run S61 decrypt) "1234" "newFolder1"))
 
 ;;buscando contenido
-(define S64 ((run S63 cd) "newFolder1"))
-(display ((run S64 grep) "hello" "newFoo1.txt"))
-(display ((run S64 grep) "hello" "*.*"))
+(define S63 ((run S62 cd) "newFolder1"))
+(display ((run S63 grep) "hello" "newFoo1.txt"))
+(display ((run S63 grep) "hello" "*.*"))
 
 ;viendo la papelera
-(display (run S45 viewTrash))
+(display (run S63 viewTrash))
 
 ;restaurando
-(define S65 ((run S45 restore) "folder1"))
+(define S64 ((run S63 restore) "folder1"))|#

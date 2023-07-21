@@ -5,7 +5,7 @@
 
 ; función para eliminar un archivo en base a un nombre especifico
 (define (del system fileName)
-  (if(null? list)#f
+  (if(null? system)#f
      (if (<(length system)8)#f
          (if(and(verificar_system_del system)(verificar_string_del fileName)(=(length system)8))
             (mismo_nombre_y_direccion? system fileName system)
