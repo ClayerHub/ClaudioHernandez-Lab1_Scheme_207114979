@@ -12,7 +12,12 @@
             (if (and(verificar_system_del system)(verificar_string_del fileName)(>(length system)8))
                 (append(mismo_nombre_y_direccion? system fileName system) (rrresto_lista_del (rrresto_lista_del (rrresto_lista_del system))))
                 #f)))))
-                     
+
+;funcion run para ejecutar el comando del en el sistema
+(define (run system command)
+  (lambda(fileName)
+    (command system fileName)))
+
 ;funcion que obtiene los elementos de una lista, excepto los primeros tres
 (define (rrresto_lista_del lista)
   (if (list? lista) (cdddr lista)null))

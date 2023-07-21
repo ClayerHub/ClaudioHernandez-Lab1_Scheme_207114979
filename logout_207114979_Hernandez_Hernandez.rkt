@@ -8,6 +8,10 @@
   (if(and (verificar_system_logout system)(> (length system)4))
      (remove (quinto_elemento_lista_logout system)system)#f))
 
+;funcion run para ejecutar el comando logout en el sistema
+(define (run system command)
+    (command system))
+
 ;funcion que verifica si el elemento es una lista
 (define (verificar_system_logout system)
   (if (list? system) #t

@@ -7,5 +7,10 @@
   (if (null? system) #f
       system))
 
+;funcion run para ejecutar el comando restore en el sistema
+(define (run system command)
+  (lambda(system fileName)
+    (command system system fileName)))
+
 ;Provide permite a que otros archivos puedan utilizar sus funciones
 (provide (all-defined-out))

@@ -8,6 +8,10 @@
       (if (<= (length system)8)#f
           (rrresto_lista_trash (rrresto_lista_trash (rresto_lista_trash system))))))
 
+;funcion run para ejecutar el comando view-trash en el sistema
+(define (run system command)
+  (command system))
+
 ;funcion que obtiene los elementos de una lista, excepto los primeros dos
 (define (rresto_lista_trash lista)
   (if (list? lista) (cddr lista)null))

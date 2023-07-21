@@ -9,6 +9,11 @@
 (define (system name)
   (if (string_name_cons name) (list name (fecha_sistema name))#f))
 
+;funcion run para ejecutar el comando system
+(define (run system)
+  (lambda(name)
+    (system name)))
+
 ;funcion que verifica si el elemento es un string
 (define (string_name_cons name)
   (if (string? name) #t

@@ -39,7 +39,11 @@
                                                                                                                           "Lectura y Escritura")))     
                        (rrresto_lista_add-file (rrresto_lista_add-file (rresto_lista_add-file system))))#f)))))
       
-                
+;funcion run para ejecutar el comando add-file en el sistema
+(define (run system command)
+  (lambda(file)
+    (command system file)))
+
 ;funcion que obtiene los elementos de una lista, excepto los primeros dos
 (define (rresto_lista_add-file lista)
   (if (list? lista) (cddr lista)null))

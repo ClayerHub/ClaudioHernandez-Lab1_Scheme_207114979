@@ -43,7 +43,10 @@
                                                  (rrresto_lista_cd (rrresto_lista_cd system)))))))))
                 #f)))))
                     
-                                                
+;funcion run para ejecutar el comando cd en el sistema
+(define (run system command)
+  (lambda(folderName)
+    (command system folderName)))                                                
 
 ;funcion que verifica si el elemento es una lista
 (define (verificar_system_cd system)

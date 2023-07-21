@@ -13,7 +13,12 @@
                  (>(length system)4)(login_existente? system userName))
              system
           #f))))
-    
+
+;funcion run para ejecutar el comando login en el sistema
+(define (run system command)
+  (lambda(userName)
+    (command system userName)))
+
 ;funcion que agrega un valor en una posicion especifica
 (define (agregar_valor_login lista name posicion)
   (if (null? lista)(list name)

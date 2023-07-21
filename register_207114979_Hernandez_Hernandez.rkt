@@ -15,10 +15,10 @@
                          (cons(tercer_elemento_lista_register system)
                               (cons(append(cuarto_elemento_lista_register system) (list userName)) (rrrresto_lista_register system)))))#f))))
                     
-;funcion run para ejecutar el comando add-drive en el sistema
-;(define (run system command)
-;  (lambda(userName)
-;    (command system userName)))
+;funcion run para ejecutar el comando register en el sistema
+(define (run system command)
+  (lambda(userName)
+    (command system userName)))
 
 ;funcion que agrega un valor en una posicion especifica
 (define (agregar_valor_register lista name posicion)

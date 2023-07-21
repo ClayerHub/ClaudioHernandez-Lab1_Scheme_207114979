@@ -7,6 +7,10 @@
   (if(null? system)#f
      system))
 
+;funcion run para ejecutar el comando decrypt en el sistema
+(define (run system command)
+  (lambda(password folderName)
+    (command system password folderName)))
 
 ;Provide permite a que otros archivos puedan utilizar sus funciones
 (provide (all-defined-out))

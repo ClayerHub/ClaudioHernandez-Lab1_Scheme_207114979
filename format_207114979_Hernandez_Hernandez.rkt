@@ -7,6 +7,10 @@
   (if(null? system)#f
      system))
 
+;funcion run para ejecutar el comando format en el sistema
+(define (run system command)
+  (lambda(letter name)
+    (command system letter name)))
 
 ;Provide permite a que otros archivos puedan utilizar sus funciones
 (provide (all-defined-out))

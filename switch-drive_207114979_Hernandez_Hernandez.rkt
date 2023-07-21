@@ -17,7 +17,10 @@
                                (cons (quinto_elemento_lista_switch system)
                                      (cons (string letter) (rrresto_lista_switch (rrresto_lista_switch system))))))))#f)))
 
-
+;funcion run para ejecutar el comando switch-drive en el sistema
+(define (run system command)
+  (lambda(letter)
+    (command system letter)))
 
 ;funcion que verifica si el elemento es una lista
 (define (verificar_system_switch system)

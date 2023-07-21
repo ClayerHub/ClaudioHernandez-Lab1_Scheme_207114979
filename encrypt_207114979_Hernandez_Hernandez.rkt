@@ -7,5 +7,10 @@
   (if(null? system)#f
      system))
 
+;funcion run para ejecutar el comando encrypt en el sistema
+(define (run system command)
+  (lambda(encrypFn decryptFn password folderName)
+    (command system encrypFn decryptFn password folderName)))
+
 ;Provide permite a que otros archivos puedan utilizar sus funciones
 (provide (all-defined-out))

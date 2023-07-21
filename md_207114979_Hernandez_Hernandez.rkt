@@ -16,7 +16,11 @@
        (if(and(verificar_system_md system)(verificar_string_md name)(> (length system)7)(not(carpeta_existente_md? system name)))
           (agregar_valor_sublista_md system (list(list name (sexto_elemento_lista_md system)(quinto_elemento_lista_md system) (fecha_md name) (fecha_md name) "Solo Lectura")))#f))))
           
-                                    
+;funcion run para ejecutar el comando md en el sistema
+(define (run system command)
+  (lambda(name)
+    (command system name)))
+
 ;funcion que agrega un valor en una posicion especifica de una sublista
 (define (agregar_valor_sublista_md lista_ext lista_int)
   (cons (primer_elemento_lista_md lista_ext)

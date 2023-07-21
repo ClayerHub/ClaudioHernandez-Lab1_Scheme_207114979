@@ -3,8 +3,14 @@
 ;Dominio->system x folderName(string)
 ;Recorrido->system
 ;función para eliminar una carpeta, siempre y cuando ésta esté vacía
-(define (rd system)
-  (lambda(folderName)#t))
+(define (rd system folderName)
+  (if (null? system)#f
+      system))
+
+;funcion run para ejecutar el comando rd en el sistema
+(define (run system command)
+  (lambda(folderName)
+    (command system folderName)))
 
 ;Provide permite a que otros archivos puedan utilizar sus funciones
 (provide (all-defined-out))
