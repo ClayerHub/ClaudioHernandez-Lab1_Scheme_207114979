@@ -1,0 +1,6 @@
+Debido a unos errores y modificaciones realizadas (ambas explicadas en el informe) se envían dos programas.
+-El Código fuente es el programa en funcionamiento, pero debido a que la función run esta implementada en cada archivo, no se pudo crear un main que los contuviera a todos.
+-El AUXILIAR es un segundo programa que varía del primero. Este programa si tiene un main que contiene todos los archivos importados, pero no contempla la función run,
+ por lo que cada una de las funciones deben ser llamadas directamente.
+
+Ambos códigos tendrán su script de pruebas (en el segundo lo incluye el archivo main en formato de comentarios), pero se diferenciarán debido a lo distinto de cada uno.

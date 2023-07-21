@@ -4,38 +4,38 @@ Requerimientos No Funcionales:
 3.-Version:1
 4.-Standard:0.75
 5.-No Variables:1
-6.-Documentacion:0.5
-7.-Dom->Rec:0.5
-8.-Organizacion:0.5
-9.-Historial:0.5
+6.-Documentacion:0.75
+7.-Dom->Rec:1
+8.-Organizacion:1
+9.-Historial:1
 10.-Script de pruebas:0.5
-11.-Prerrequisitos:0.5
+11.-Prerrequisitos:1
 
 Requerimientos Funcionales:
-1.-TDAs:0.25
-2.-constructor:1
+1.-TDAs:1
+2.-constructor:
 3.-run:1
 4.-add-drive:1
 5.-register:1
 6.-login:1
 7.-logout:1
 8.-switch-drive:1
-9.-md(make directory):0
-10.-cd(change directory):0
-11.-add-file:0
-12.-del:0
-13.-rd(remove directory):0
-14.-copy:0
-15.-move:0
-16.-ren(rename):0
-17.-dir(directory):0
-18.-format:0
-19.-encrypt:0
-20.-decrypt:0
-21.-plus-one:0
-22.-minus-one:0
-23.-grep:0
-24.-view-trash:0
-25.-restore:0
+9.-md(make directory):1
+10.-cd(change directory):1
+11.-add-file:1
+12.-del:1
+13.-rd(remove directory):0.25
+14.-copy:0.25
+15.-move:0.25
+16.-ren(rename):0.25
+17.-dir(directory):0.25
+18.-format:0.25
+19.-encrypt:0.25
+20.-decrypt:0.25
+21.-plus-one:0.25
+22.-minus-one:0.25
+23.-grep:0.25
+24.-view-trash:0.25
+25.-restore:0.25
 
-Nota Estimada: 2.7
+Nota Estimada: 4.4
